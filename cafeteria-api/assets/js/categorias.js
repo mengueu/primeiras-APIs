@@ -1,8 +1,63 @@
 var divResposta = document.getElementById("resposta")
+var inputNome   = document.getElementById("nome")
 
 document.addEventListener('DOMContentLoaded', getCategorias)
+document.getElementById('botaoEnviar').addEventListener('click', postCategoria)
 
 async function getCategorias() {
-    var requisicao = await fetch('http://localhost/2026-3ano/Aula-BackEnd2/aula07/cafeteria-api/categorias')
+    var requisicao = await fetch("http://localhost/cafeteria-api/backend/categorias")
+    var resposta = await requisicao.json()
+    console.log("Status de conexão (GET): '" + resposta.status + "'")
+
+    const linhas = resposta.data.map(item => `
+        <tr>
+            <td>${item.id}</td>
+            <td>${item.nome}</td>
+            <td><button onclick="deleteCategoria(${item.id})">Deletar</button></td>
+        </tr>
+    `).join("");
+    
+    divResposta.innerHTML = `
+        <table class="sua-classe">
+            <thead>
+                <tr>
+                    <th colspan="3" ><center>Categorias Cadastradas</center></th>
+                </tr>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Opções</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${linhas}
+            </tbody>
+        </table>
+    `;
 }
-// http://localhost/2026-3ano/Aula-BackEnd2/aula07/cafeteria-api/categorias
+
+async function postCategoria() {
+    var requisicao = await fetch("http://localhost/cafeteria-api/backend/categorias", {
+        method:  "POST",
+        headers: {
+            "Content-Type": "application/json" 
+        },
+        body: JSON.stringify({ nome: inputNome.value })
+    })
+    var resposta = await requisicao.json()
+    console.log("Status de conexão (POST): '" + resposta.status + "'\nMensagem: '" + resposta.message + "' ID: " + resposta.idCategoria)
+    
+    inputNome.value = ""
+
+    getCategorias()
+}
+
+async function deleteCategoria(id) {
+    var requisicao = await fetch("http://localhost/cafeteria-api/backend/categorias/" + id, {
+        method: "DELETE"
+    }) 
+    var resposta = await requisicao.json()
+    console.log("Status de conexão (POST): '" + resposta.status + "'\nMensagem: '" + resposta.message + "' ID: " + resposta.idCategoria)
+ 
+    getCategorias()
+}
