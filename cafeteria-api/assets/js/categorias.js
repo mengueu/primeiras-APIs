@@ -1,11 +1,11 @@
 var divResposta = document.getElementById("resposta")
-var inputNome   = document.getElementById("nome")
+var inputNome   = document.getElementById("nome")   
 
 document.addEventListener('DOMContentLoaded', getCategorias)
 document.getElementById('botaoEnviar').addEventListener('click', postCategoria)
 
 async function getCategorias() {
-    var requisicao = await fetch("http://localhost/cafeteria-api/backend/categorias")
+    var requisicao = await fetch("http://localhost/2026-3ano/Projetos/cafeteria-api/backend/categorias")
     var resposta = await requisicao.json()
     console.log("Status de conexão (GET): '" + resposta.status + "'")
 
@@ -29,15 +29,19 @@ async function getCategorias() {
                     <th>Opções</th>
                 </tr>
             </thead>
-            <tbody>
-                ${linhas}
-            </tbody>
+            <tbody>${linhas}</tbody>
         </table>
     `;
 }
 
 async function postCategoria() {
-    var requisicao = await fetch("http://localhost/cafeteria-api/backend/categorias", {
+
+    if (inputNome.value.trim() === "") {
+        alert("Por favor, digite o nome da categoria.");
+        return;
+    }
+
+    var requisicao = await fetch("http://localhost/2026-3ano/Projetos/cafeteria-api/backend/categorias", {
         method:  "POST",
         headers: {
             "Content-Type": "application/json" 
@@ -53,11 +57,11 @@ async function postCategoria() {
 }
 
 async function deleteCategoria(id) {
-    var requisicao = await fetch("http://localhost/cafeteria-api/backend/categorias/" + id, {
+    var requisicao = await fetch("http://localhost/2026-3ano/Projetos/cafeteria-api/backend/categorias/" + id, {
         method: "DELETE"
     }) 
     var resposta = await requisicao.json()
-    console.log("Status de conexão (POST): '" + resposta.status + "'\nMensagem: '" + resposta.message + "' ID: " + resposta.idCategoria)
+    console.log("Status de conexão (DELETE): '" + resposta.status + "'\nMensagem: '" + resposta.message + "' ID: " + resposta.idCategoria)
  
     getCategorias()
 }

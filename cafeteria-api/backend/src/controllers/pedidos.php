@@ -17,36 +17,33 @@ if (isset($segments[3])) { // cafeteria-api/backend/produtos/ID
 switch($method){
 
     case 'GET':
-        $resultado = $database->executeQuery('SELECT * FROM categorias');
-        $categorias = $resultado->fetchAll();
+        $resultado = $database->executeQuery('SELECT * FROM pedidos');
+        $pedidos = $resultado->fetchAll();
 
         echo json_encode([
             'status' => 'success',
-            'data'   => $categorias
+            'data'   => $pedidos
         ]);
         break;
 
     case 'POST':
         $body = json_decode(file_get_contents('php://input'), true);
-        $nome = trim($body['nome']);
+        $cliente = trim($body['cliente']);
 
-        if(!$nome){
+        if(!$cliente){
             echo json_encode([
                 'status' => 'error',
                 'message' => 'Campo não informado'
             ]);
             break;
         }
-        $database->executeQuery(
-            "INSERT INTO categorias (nome) VALUES (:nome)",
-            [ ':nome' => $nome ]
-        );
+        $database->executeQuery("INSERT INTO pedidos (cliente) VALUES (:cliente)", [ ':cliente' => $cliente ]);
 
         http_response_code(201);
         echo json_encode([
             'status' => 'success',
-            'message' => 'Categoria CADASTRADA com sucesso',
-            'idCategoria' => $database->lastInsertId()
+            'message' => 'Pedido CADASTRADO com sucesso',
+            'idPedidos' => $database->lastInsertId()
         ]);
         
         break;
@@ -56,25 +53,25 @@ switch($method){
             http_response_code(400);
             echo json_encode([
                 'status'  => 'error',
-                'message' => 'Informe o id da categoria na URL.'
+                'message' => 'Informe o id do pedido na URL.'
             ]);
             break;
         }
-        $stmt = $database->executeQuery('DELETE FROM categorias WHERE id = :id', [':id' => $id]);
+        $stmt = $database->executeQuery('DELETE FROM pedidos WHERE id = :id', [':id' => $id]);
  
         if ($stmt->rowCount() === 0) {
             http_response_code(404);
             echo json_encode([
                 'status'  => 'error',
-                'message' => 'Categoria não encontrada.'
+                'message' => 'Pedido não encontrado.'
             ]);
             break;
         }
  
         echo json_encode([
             'status'  => 'success',
-            'message' => 'Categoria REMOVIDA com sucesso.',
-            'idCategoria' => $id
+            'message' => 'Pedido REMOVIDO com sucesso.',
+            'idPedidos' => $id
         ]);
         break;
 

@@ -1,117 +1,308 @@
+/* Importação de fonte moderna */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --primary: #4e342e;       /* Marrom Café Profundo */
+    --accent: #d4a373;        /* Bege Latte */
+    --success: #2d6a4f;       /* Verde Floresta */
+    --danger: #9b2226;        /* Vermelho Bordô */
+    --bg: #f8f9fa;            /* Cinza ultra claro */
+    --white: #ffffff;
+    --text: #212529;
+    --radius: 12px;
+    --shadow: 0 8px 30px rgba(0,0,0,0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
 
 body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    padding: 40px 20px;
+    background-image: radial-gradient(#d4a37333 1px, transparent 1px);
+    background-size: 20px 20px; /* Leve padrão de pontos ao fundo */
 }
 
-h2, p {
-  margin: 10px;
-}
-
-
-
-/* ========== Estilização para o Menu ========== */
+/* Menu de Navegação Superior */
 ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: #333333;
-}
-
-ul li {
-  float: left;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    background: var(--primary);
+    padding: 12px;
+    border-radius: 50px;
+    max-width: 600px;
+    margin: 0 auto 40px auto;
+    box-shadow: var(--shadow);
 }
 
 ul li a {
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+    color: #ede0d4;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
 }
 
 ul li a:hover {
-  background-color: #111111;
+    background: var(--accent);
+    color: var(--primary);
 }
 
-/* Estilização para o Formulário */
-.formulario{
-  width: 500px;
-  margin: 0 auto;
-  margin-bottom: 30px;
+/* Títulos */
+h1 {
+    text-align: center;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 30px;
+    font-size: 2.2rem;
+}
+
+h3 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+h3::before {
+    content: '';
+    width: 6px;
+    height: 25px;
+    background: var(--accent);
+    border-radius: 10px;
+}
+
+/* Containers e Formulários */
+.formulario {
+    background: var(--white);
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    padding: 30px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
 }
 
 .formulario h3 {
-  text-align: center;
+    grid-column: 1 / -1;
 }
 
-
-/* Estilização para os campos do Formulário */
-
-label {display: block;}
-
-input[type=text], [type=number], select {
-  width: 100%;
-  padding: 12px;
-  margin: 10px 0;
-  box-sizing: border-box;
-  border: 2px solid;
-  border-radius: 8px;
+/* Estilização de Labels e Inputs */
+label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--primary);
+    text-transform: uppercase;
 }
 
-/* Estilização para o botão do formulário */
-
-.button {
-  background-color: white;
-  border: none;
-  color: black;
-  padding: 10px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-
+input, select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
 }
 
+input:focus, select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(212, 163, 115, 0.2);
+}
+
+/* Botões */
 .button-enviar {
-  border: 2px solid #04AA6D;
-
+    grid-column: 1 / -1;
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
 }
+
 .button-enviar:hover {
-  background-color: #04AA6D;
-  color: white;
+    background: var(--accent);
+    color: var(--primary);
+    transform: translateY(-2px);
 }
 
-/* ========== Estilização da tabela de Dados ========== */
-
-.tabela{
-  width: 700px;
-  margin: 0 auto;
+/* Tabelas (Injetadas pelo JS) */
+.tabela {
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
+table.sua-classe {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
 }
 
-td, th {
-  border: 1px solid #ddd;
-  padding: 8px;
+table.sua-classe thead th {
+    background: #fdfaf7;
+    color: var(--primary);
+    padding: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #eee;
 }
 
-tr:nth-child(even){background-color: #f2f2f2;}
+/* Estilo para o <center> dentro do <th> que você usou no JS */
+table.sua-classe thead th center {
+    font-size: 1.1rem;
+    color: var(--accent);
+}
 
-tr:hover {background-color: #ddd;}
+table.sua-classe tbody td {
+    padding: 15px 18px;
+    border-bottom: 1px solid #f1f1f1;
+    color: #444;
+}
 
-th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #04AA6D;
-  color: white;
+table.sua-classe tbody tr:last-child td {
+    border-bottom: none;
+}
+
+table.sua-classe tbody tr:hover {
+    background-color: #fffaf5;
+}
+
+/* Links de Detalhes e Botões de Deletar */
+a[href*="pedido_itens"] {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 700;
+    background: #ede0d4;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+a[href*="pedido_itens"]:hover {
+    background: var(--accent);
+}
+
+button[onclick*="delete"], button[onclick*="Remover"] {
+    background: #fff0f0;
+    color: var(--danger);
+    border: 1px solid #ffcccc;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 0.8rem;
+}
+
+button[onclick*="delete"]:hover, button[onclick*="Remover"]:hover {
+    background: var(--danger);
+    color: var(--white);
+    border-color: var(--danger);
+}
+
+table.sua-classe thead th {
+    text-align: center; 
+    vertical-align: middle;
+}
+
+table.sua-classe tbody td {
+    text-align: center; 
+    vertical-align: middle; 
+}
+
+table.sua-classe tbody td {
+    display: table-cell; 
+}
+
+table.sua-classe td:last-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px; 
+    border-bottom: 1px solid #f1f1f1;
+    height: 100%; 
+}
+
+table.sua-classe td:last-child a {
+    margin-right: 0;
+}
+
+.boas-vindas {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.boas-vindas p {
+    color: var(--primary);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+.hero-image {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: var(--radius); /* Usa o mesmo arredondamento das tabelas */
+    overflow: hidden;
+    box-shadow: var(--shadow); /* Usa a mesma sombra suave */
+    border: 5px solid var(--white); /* Cria uma moldura branca elegante */
+    transition: transform 0.3s ease;
+}
+
+.hero-image:hover {
+    transform: scale(1.02); /* Leve zoom ao passar o mouse */
+}
+
+.hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .formulario {
+        grid-template-columns: 1fr;
+    }
+    
+    ul {
+        flex-wrap: wrap;
+        border-radius: 20px;
+    }
+    
+    table.sua-classe {
+        display: block;
+        overflow-x: auto;
+    }
 }
