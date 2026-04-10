@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Meus Planos</title>
+</head>
+<body>
+    <div class="container">
+        <ul>
+            <li><a href="index.html">Início</a></li>
+            <li><a href="itens.html">Meus Planos</a></li>
+            <li><a href="categorias.html">Categorias</a></li>
+        </ul>
+    </div>
+
+    <div class="formulario">
+        <h3>Cadastro de Itens</h3>
+
+        <label for="nome">Item</label>
+        <input type="text" id="item" name="item">
+
+        <label for="categorias">Categoria</label>
+        <select name="categorias" id="categorias"></select>
+
+        <button type="button" id="botaoEnviar" class="button button-enviar">Cadastrar</button>
+    </div>
+
+    <div id="resposta" class="tabela"></div>
+    <br>
+</body>
+<script src="assets/js/itens.js"></script>
+</html>
